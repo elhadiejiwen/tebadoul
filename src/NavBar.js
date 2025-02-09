@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";  // Importation de Link
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,27 +8,25 @@ function Navbar() {
     <nav className="bg-blue-600 p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* LOGO */}
-        <a href="#" className="text-white text-2xl font-bold">
+        <Link to="/" className="text-white text-2xl font-bold">
           Tebadoul
-        </a>
+        </Link>
 
         {/* MENU - Desktop */}
-        <ul className="hidden md:flex space-x-6 text-white">
+        <ul className="hidden md:flex space-x-6 text-white justify-center flex-1">
           <li>
-            <a href="#" className="hover:underline">Accueil</a>
+            <Link to="/form" className="hover:underline">اتصل بنا</Link>
           </li>
           <li>
-            <a href="#" className="hover:underline">Echange</a>
+            <Link to="/echange" className="hover:underline">بحث</Link>
           </li>
           <li>
-            <a href="#" className="hover:underline">Contact</a>
+            <Link to="/form" className="hover:underline">تسجيل البيانات</Link>
+          </li>
+          <li>
+            <Link to="/" className="hover:underline">الصڢحة الرئيسية</Link>
           </li>
         </ul>
-
-        {/* BOUTON LOGIN */}
-        <button className="hidden md:block bg-white text-blue-600 px-4 py-2 rounded shadow hover:bg-gray-200">
-          Connexion
-        </button>
 
         {/* BOUTON BURGER - Mobile */}
         <button
@@ -37,19 +36,15 @@ function Navbar() {
           ☰
         </button>
       </div>
-
+      
       {/* MENU - Mobile */}
       {isOpen && (
         <div className="md:hidden bg-blue-700 p-4">
           <ul className="text-white space-y-4">
-            <li><a href="#" className="block hover:underline">Accueil</a></li>
-            <li><a href="#" className="block hover:underline">Services</a></li>
-            <li><a href="#" className="block hover:underline">Contact</a></li>
-            <li>
-              <button className="w-full bg-white text-blue-600 py-2 rounded shadow hover:bg-gray-200">
-                Connexion
-              </button>
-            </li>
+            <li><Link to="/" className="block hover:underline">الصڢحة الرئيسية</Link></li>
+            <li><Link to="/echange" className="block hover:underline">بحث</Link></li>
+            <li><Link to="/form" className="block hover:underline">اتصل بنا</Link></li>
+            <li><Link to="/Inscription" className="block hover:underline">تسجيل البيانات</Link></li>
           </ul>
         </div>
       )}
