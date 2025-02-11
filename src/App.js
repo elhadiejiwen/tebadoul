@@ -13,6 +13,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<ContactPage />} />
+
+          
           <Route path="/form" element={<Inscription />} />
           <Route path="/echange" element={<Echange />} /> {/* Ajout de la route */}
         </Routes>
