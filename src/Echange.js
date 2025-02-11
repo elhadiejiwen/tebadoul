@@ -66,7 +66,7 @@ export default function Echange() {
 
   const handleSearch = () => {
     if (formData.matricule.trim() === "") {
-      setErrorMessage("Veuillez entrer un matricule.");
+      setErrorMessage("قم بإدخال الرقم الاستدلالي");
       setUserInfo(null);
       setMatchingUsers([]);
       setNoResultsMessage(""); // Réinitialiser le message de résultat vide
