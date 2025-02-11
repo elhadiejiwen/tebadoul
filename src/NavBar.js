@@ -15,7 +15,7 @@ function Navbar() {
         {/* MENU - Desktop */}
         <ul className="hidden md:flex space-x-6 text-white justify-center flex-1">
           <li>
-            <Link to="/form" className="hover:underline">اتصل بنا</Link>
+            <Link to="/f" className="hover:underline">اتصل بنا</Link>
           </li>
           <li>
             <Link to="/echange" className="hover:underline">بحث</Link>

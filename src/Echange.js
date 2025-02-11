@@ -24,6 +24,8 @@ export default function Echange() {
   const [editMode, setEditMode] = useState(false);
   const [matchingUsers, setMatchingUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [noResultsMessage, setNoResultsMessage] = useState("");
+
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/wilaya")
@@ -67,9 +69,10 @@ export default function Echange() {
       setErrorMessage("Veuillez entrer un matricule.");
       setUserInfo(null);
       setMatchingUsers([]);
+      setNoResultsMessage(""); // Réinitialiser le message de résultat vide
       return;
     }
-
+  
     setLoading(true);
     axios.get(`http://localhost:5000/api/utilisateur/${formData.matricule}`)
       .then((response) => {
@@ -83,7 +86,8 @@ export default function Echange() {
           moughataa_actuel: user.moughataa_actuel || "",
           moughataa_souhaite: user.moughataa_souhaite || ""
         }));
-
+  
+        // Recherche des utilisateurs correspondants
         axios.get(`http://localhost:5000/api/utilisateurs/match`, {
           params: {
             wilaya_actuel: user.wilaya_actuel,
@@ -93,25 +97,30 @@ export default function Echange() {
           }
         })
         .then((res) => {
+          if (res.data.length === 0) {
+            setNoResultsMessage("Le résultat est vide.");
+          } else {
+            setNoResultsMessage(""); // Pas de message si des résultats sont trouvés
+          }
           setMatchingUsers(res.data);
-          console.log("donnee",res.data)
         })
         .catch((err) => {
           console.error("Erreur lors de la récupération des utilisateurs correspondants :", err);
+          setNoResultsMessage("Erreur lors de la recherche des résultats.");
         });
       })
       .catch((error) => {
         if (error.response && error.response.status === 404) {
-          setErrorMessage("Matricule non trouvé. Veuillez vous inscrire avant de continuer.");
+          setErrorMessage(".الرقم الاستدلالي غير مسجل، يجب علك التسجيل قبل البحث");
           setUserInfo(null);
           setMatchingUsers([]);
+          setNoResultsMessage(""); // Réinitialiser le message de résultat vide
         } else {
           setErrorMessage("Erreur lors de la vérification du matricule.");
         }
       })
       .finally(() => setLoading(false));
   };
-
   const handleEdit = () => {
     setEditMode(true);
   };
@@ -119,7 +128,7 @@ export default function Echange() {
   const handleUpdate = () => {
     axios.put(`http://localhost:5000/api/utilisateur/${formData.matricule}`, formData)
       .then((response) => {
-        setSuccessMessage("Informations mises à jour avec succès !");
+        setSuccessMessage("!تم تحديث المعلومات بنجاح");
         setEditMode(false);
         setUserInfo(response.data);
 
@@ -157,6 +166,13 @@ export default function Echange() {
             name="matricule"
             value={formData.matricule}
             onChange={handleChange}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();  // Empêche le rechargement de la page
+                  handleSearch();      // Lance la recherche
+                }
+              }}
+            
             className="p-2 border rounded w-full"
             required
           />
@@ -166,7 +182,7 @@ export default function Echange() {
             className="bg-blue-500 text-white p-2 rounded w-full mt-2 hover:bg-blue-600"
             disabled={loading}
           >
-            {loading ? "Chargement..." : "Rechercher"}
+            {loading ? "Chargement..." : "بحث"}
           </button>
         </div>
 
@@ -245,7 +261,7 @@ export default function Echange() {
               onClick={handleUpdate}
               className="bg-green-500 text-white p-2 rounded w-full hover:bg-green-600"
             >
-              Enregistrer les modifications
+              حفظ المعلومات
             </button>
           </>
         )}
@@ -261,7 +277,7 @@ export default function Echange() {
               className="text-gray-600 hover:text-yellow-500"
               title="Modifier les informations"
             >
-              <Pencil size={20} />
+              < Pencil size={20}  />  
             </button>
           </h3>
           <p><strong>الرقم الاستدلالي :</strong> {userInfo.matricule}</p>
@@ -276,7 +292,7 @@ export default function Echange() {
 
       {matchingUsers.length > 0 && (
         <div className="bg-gray-100 border border-gray-300 text-gray-800 px-4 py-3 rounded mt-4">
-          <h3 className="text-lg font-bold mb-2">لائحة الموظفين الراغبين في التحويل الى موقع عملك :</h3>
+          <h3 className="text-lg font-bold mb-2">لائحة الموظفين الراغبين في التحويل الى موقع عملك</h3>
           <table className="min-w-full bg-white border">
             <thead>
               <tr>
@@ -294,7 +310,8 @@ export default function Echange() {
                   <td className="px-4 py-2 border">{user.matricule}</td>
                   <td className="px-4 py-2 border">{user.num_tel}</td>
                   <td className="px-4 py-2 border">{wilayas.find(w => w.id === user.wilaya_actuel)?.nom || "Non spécifiée"}</td>
-                 
+                  {console.log("user",user)}
+                  {console.log("m",moughataasT)}
                   <td className="px-4 py-2 border">{moughataasT.find(m => m.id === user.moughataa_actuel)?.nom || "Non spécifiée"}</td>
                   <td className="px-4 py-2 border">{wilayas.find(w => w.id === user.wilaya_souhaite)?.nom || "Non spécifiée"}</td>
                   <td className="px-4 py-2 border">{moughataasT.find(m => m.id === user.moughataa_souhaite)?.nom || "Non spécifiée"}</td>
@@ -302,8 +319,14 @@ export default function Echange() {
               ))}
             </tbody>
           </table>
+
         </div>
       )}
+            {noResultsMessage && (
+      <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mt-4">
+        لايوجد حاليا موظف  يرغب في التحويل لموقع عملك الحالي
+      </div>
+    )}
     </div>
   );
 }

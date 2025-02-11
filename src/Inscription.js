@@ -115,7 +115,7 @@ const InscriptionForm = () => {
             <div className="bg-white p-8 rounded shadow-md w-2/3 flex flex-col justify-center">
                 <h2 className="text-2xl font-bold mb-4 text-center">استمارة تسجيل البيانات</h2>
                 {submitted ? (
-                    <p className="text-green-500">تم التسجيل بنجاح !</p>
+                    <p className="text-green-500">تم التسجيل بنجاح</p>
                 ) : (
                     <>
                         {errorMessage && (
