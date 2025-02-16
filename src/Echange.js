@@ -144,7 +144,7 @@ export default function Echange() {
 
   return (
     <div className="bg-white p-8 rounded shadow-md w-2/3 text-center">
-      <h2 className="text-2xl font-bold mb-4">قم بادخال الرقم الاستدلالي من اجل ربطك بجميع من يرغب بالتحويل الى موقع عملك الحالي</h2>
+      <h2 className="text-2xl font-bold mb-4">رجاءا قم بادخال الرقم الاستدلالي, من اجل ربطك بجميع من يرغب بالتحويل الى موقع عملك الحالي</h2>
 
       {successMessage && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -179,7 +179,7 @@ export default function Echange() {
           <button
             type="button"
             onClick={handleSearch}
-            className="bg-blue-500 text-white p-2 rounded w-full mt-2 hover:bg-blue-600"
+            className="bg-blue-700 text-white p-2 rounded w-full mt-2 hover:bg-blue-600"
             disabled={loading}
           >
             {loading ? "Chargement..." : "بحث"}
