@@ -98,7 +98,7 @@ export default function Echange() {
         })
         .then((res) => {
           if (res.data.length === 0) {
-            setNoResultsMessage("Le résultat est vide.");
+            setNoResultsMessage("الحقول فارغة.");
           } else {
             setNoResultsMessage(""); // Pas de message si des résultats sont trouvés
           }
