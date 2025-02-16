@@ -137,7 +137,7 @@ const InscriptionForm = () => {
 
                             <div>
                                 <label className="mb-2 text-gray-700">رقم الهاتف</label>
-                                <input type="text" name="num_tel" value={formData.num_tel} onChange={handleChange} className="p-2 border rounded w-full" required />
+                                <input type="tel" name="num_tel" value={formData.num_tel} onChange={handleChange} className="p-2 border rounded w-full" required />
                             </div>
 
                             <div>
@@ -208,7 +208,7 @@ const InscriptionForm = () => {
                             </div>
 
                             <div className="col-span-2">
-                                <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">ارسال</button>
+                                <button type="submit" className="bg-green-500 text-white p-2 rounded w-full">تسجيل</button>
                             </div>
                         </form>
                     </>
