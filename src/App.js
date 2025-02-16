@@ -19,6 +19,7 @@ export default function App() {
           <Route path="/echange" element={<Echange />} /> {/* Ajout de la route */}
         </Routes>
       </div>
+      <div className="flex items-center justify-center py-4 bg-gray-300">© جميع الحقوق محفوظة تبادل ٢٠٢٥</div>
     </Router>
   );
 }
