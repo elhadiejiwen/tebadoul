@@ -35,8 +35,8 @@ function HomePage() {
 function ContactPage() {
   return (
     <div className="bg-white p-8 rounded shadow-md w-2/3 text-center">
-      <h2 className="text-2xl font-bold mb-4">Bienvenue </h2>
-      <p className="text-gray-600">إضغط على "تسجيل البيانات" لتستفيد من خدماتنا</p>
+      <h2 className="text-2xl font-bold mb-4">نرحب بتواصل معنا من خلال العناوين التالية </h2>
+      <p className="text-gray-600">رقم الهاتف, الايميل ... الخ</p>
     </div>
   );
 }
