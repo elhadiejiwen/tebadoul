@@ -25,6 +25,10 @@ const InscriptionForm = () => {
     const [moughataasActuel, setMoughataasActuel] = useState([]);
     const [moughataasSouhaite, setMoughataasSouhaite] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
+    const [errorNumTel, setErrorNumTel] = useState("");
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    
 
     useEffect(() => {
         axios.get("http://localhost:5000/api/wilaya")
@@ -81,15 +85,32 @@ const InscriptionForm = () => {
     };
 
     const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        // Vérifier si c'est le champ "nom" ou "prenom" et s'assurer qu'il ne contient que des lettres
+        if ((name === "nom" || name === "prenom") && !/^[a-zA-Z\u0600-\u06FF\s]*$/.test(value)) {
+            return; // Empêche la mise à jour de l'état si un caractère non valide est saisi
+        }
+        
+    
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitted(true); // Marque que le formulaire a été soumis
         setErrorMessage("");
-
+    
+        // Vérification du numéro de téléphone (exactement 8 chiffres)
+        if (!/^\d{8}$/.test(formData.num_tel)) {
+            setErrorNumTel("رقم الهاتف غير صحيح");
+            return; // Stoppe l'envoi du formulaire si erreur
+        } else {
+            setErrorNumTel(""); // Efface le message d'erreur si le numéro est valide
+        }
+    
         console.log("Données envoyées : ", formData);
-
+    
         try {
             const response = await axios.post("http://localhost:5000/api/form", formData);
             console.log("Réponse du serveur : ", response.data);
@@ -97,7 +118,7 @@ const InscriptionForm = () => {
             navigate("/echange");
         } catch (error) {
             console.error("Erreur lors de l'envoi du formulaire", error);
-
+    
             if (error.response) {
                 if (error.response.status === 409) {
                     setErrorMessage("Ce matricule existe déjà. Veuillez en choisir un autre.");
@@ -109,6 +130,7 @@ const InscriptionForm = () => {
             }
         }
     };
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -136,9 +158,19 @@ const InscriptionForm = () => {
                             </div>
 
                             <div>
-                                <label className="mb-2 text-gray-700">رقم الهاتف</label>
-                                <input type="tel" name="num_tel" value={formData.num_tel} onChange={handleChange} className="p-2 border rounded w-full" required />
-                            </div>
+                               <label className="mb-2 text-gray-700">رقم الهاتف</label>
+                               <input 
+                               type="tel" 
+                               name="num_tel" 
+                               value={formData.num_tel} 
+                               onChange={handleChange} 
+                               className="p-2 border rounded w-full" 
+                               required 
+                              />
+                           {isSubmitted && errorNumTel && (
+                          <p className="text-red-500 text-sm mt-1">{errorNumTel}</p>
+                          )}
+                         </div>
 
                             <div>
                                 <label className="mb-2 text-gray-700">الرقم الاستدلالي</label>
