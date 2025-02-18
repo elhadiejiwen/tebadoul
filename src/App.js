@@ -4,6 +4,7 @@ import Navbar from "./NavBar";
 import Inscription from "./Inscription";
 import Echange from "./Echange";  // Import du composant Echange
 
+
 export default function App() {
   return (
     <Router>
@@ -28,7 +29,7 @@ function HomePage() {
   return (
     <div className="bg-white p-8 rounded shadow-md w-2/3 text-center">
       <h2 className="text-2xl font-bold mb-4">أهلا بكم في تبادل</h2>
-      <p className="text-gray-600">إضغط على "تسجيل البيانات" لتستفيد من خدماتنا</p>
+      <p className="text-gray-600">مرحبًا بكم في منصتنا المخصصة لمساعدة الأساتذة والمعلمين على التسجيل والتواصل من اجل تبادل أماكن العمل. نحن نسعى لتوفير بيئة سهلة وفعّالة تمكن المعلمين والأساتذة  من التواصل مع زملائهم وتبادل المعلومات حول الفرص المتاحة في مختلف المؤسسات التعليمية.</p>
     </div>
   );
 }
@@ -36,8 +37,13 @@ function HomePage() {
 function ContactPage() {
   return (
     <div className="bg-white p-8 rounded shadow-md w-2/3 text-center">
-      <h2 className="text-2xl font-bold mb-4">نرحب بتواصل معنا من خلال العناوين التالية </h2>
-      <p className="text-gray-600">رقم الهاتف, الايميل ... الخ</p>
+      <h2 className="text-2xl font-bold mb-4">نرحب بتواصلكم معنا من خلال العناوين التالية</h2>
+  
+      <div className="text-gray-700 text-lg space-y-3">
+        <p>📞 رقم الهاتف :  +222 45 12 34 56</p>
+        <p>📧 البريد الإلكتروني : contact@email.com</p>
+        <p>💬 واتساب :  +222 25 67 89 10</p>
+      </div>
     </div>
   );
 }

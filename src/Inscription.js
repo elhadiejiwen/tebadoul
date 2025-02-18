@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const InscriptionForm = () => {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         nom: "",
@@ -115,7 +115,7 @@ const InscriptionForm = () => {
             const response = await axios.post("http://localhost:5000/api/form", formData);
             console.log("Réponse du serveur : ", response.data);
             setSubmitted(true);
-            navigate("/echange");
+            //navigate("/echange");
         } catch (error) {
             console.error("Erreur lors de l'envoi du formulaire", error);
     
@@ -135,9 +135,10 @@ const InscriptionForm = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded shadow-md w-2/3 flex flex-col justify-center">
-                <h2 className="text-2xl font-bold mb-4 text-center">استمارة تسجيل البيانات</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">تم التسجيل بنجاح</h2>
                 {submitted ? (
-                    <p className="text-green-500">تم التسجيل بنجاح</p>
+                    <p className="text-green-500"><p> يمكنك بدأ البحث بالنقر <a href="/echange">هنا</a> أو الضغط على زر بحث.</p>
+</p>
                 ) : (
                     <>
                         {errorMessage && (

@@ -1,0 +1,6 @@
+body {
+    background-image: url('/source/image.png');
+    background-size: cover; /* Cela ajuste l'image pour couvrir tout l'écran */
+    background-position: center; /* Cela centre l'image */
+    background-attachment: fixed; /* Cela garde l'image en place lors du défilement */
+}

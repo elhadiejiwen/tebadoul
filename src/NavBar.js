@@ -13,19 +13,23 @@ function Navbar() {
         </Link>
 
         {/* MENU - Desktop */}
-        <ul className="hidden md:flex space-x-6 text-white justify-center flex-1">
+        <ul className="hidden md:flex space-x-12 text-white justify-center flex-1">
+           <li>
+           <Link to="/" className="hover:underline mx-4">الصڢحة الرئيسية</Link>
+           </li>
+
           <li>
-            <Link to="/contact" className="hover:underline">اتصل بنا</Link>
+            <Link to="/form" className="hover:underline mx-4">تسجيل البيانات</Link>
           </li>
+
           <li>
             <Link to="/echange" className="hover:underline">بحث</Link>
           </li>
+
           <li>
-            <Link to="/form" className="hover:underline">تسجيل البيانات</Link>
+            <Link to="/contact" className="hover:underline">اتصل بنا</Link>
           </li>
-          <li>
-            <Link to="/" className="hover:underline">الصڢحة الرئيسية</Link>
-          </li>
+          
         </ul>
 
         {/* BOUTON BURGER - Mobile */}
