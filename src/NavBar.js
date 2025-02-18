@@ -23,7 +23,7 @@ function Navbar() {
           </li>
 
           <li>
-            <Link to="/echange" className="hover:underline">بحث</Link>
+            <Link to="/echange" className="hover:underline mx-4">بحث</Link>
           </li>
 
           <li>
